@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>アンケート削除</h1>
+{% endblock %}
+
+
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+<div class="alert alert-danger" role="alert">
+    下記アンケートを削除します。
+    よろしければ、削除ボタンを押してください。
+</div>
+  <table class="table">
+    <tr>
+      <th>アンケートID</th>
+      <td>{{ object.enquete_id }}</td>
+    <tr>
+    <tr>
+      <th>アンケート名</th>
+      <td>{{ object.enquete_name }}</td>
+    <tr>
+    <tr>
+      <th>登録日</th>
+      <td>{{ object.registraton_date }}</td>
+    <tr>
+    <tr>
+      <th>回答期日</th>
+      <td>{{ object.answer_date }}</td>
+    <tr>
+  </table>
+  <!-- TODO:削除フラグをTrueに更新する処理に変更する -->
+  <input type="submit" class="btn btn-dark" value="削除する">
+
+</form>
+
+{% endblock %}

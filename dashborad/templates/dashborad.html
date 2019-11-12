@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>アンケート一覧</h1>
+{% endblock %}
+
+{% block content %}
+<!--ページネーション -->
+<!-- TODO:あとでブロック化する -->
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <!-- Prevの部分 -->
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+    {% endif %}
+
+    <!-- 数字の部分 -->
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+      {% else %}
+       <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Nextの部分 -->
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next<</a></li>
+    {% endif %}
+
+  </ul>
+</nav>
+
+<!-- テーブル -->
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>アンケートID</th>
+      <th>アンケート名</th>
+      <th>登録日</th>
+      <th>回答期日</th>
+      <th>操作1</th>
+      <th>操作2</th>
+    </tr>
+  </thead>
+  {% for i in object_list %}
+  <tr>
+    <td><a href="{% url 'detail' i.enquete_id %}">{{ i.enquete_id }}</a></td>
+    <td>{{ i.enquete_name }}</td>
+    <td>{{ i.registration_date }}</td>
+    <td>{{ i.answer_date }}</td>
+    <td><a href="{% url 'answer' i.enquete_id %}">回答する</a></td>
+    <td><a href="{% url 'delete' i.enquete_id %}">削除する</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

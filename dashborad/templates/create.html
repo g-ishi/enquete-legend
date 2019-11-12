@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>アンケート作成</h1>
+{% endblock %}
+
+
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+  <table class="table">
+    <tr>
+      <th>作成者を選択してください</th>
+      <td>{{ form.member_id }}</td>
+    <tr>
+    <tr>
+      <th>作成するアンケートの名前を記入してください</th>
+      <td>{{ form.enquete_name }}</td>
+    <tr>
+    <tr>
+      <th>回答期日を選択してください</th></th>
+      <td>{{ form.answer_date }}</td>
+    <tr>
+  </table>
+  <input type="submit" class="btn btn-dark" value="作成する">
+</form>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>アンケート回答画面</h1>
+{% endblock %}
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+  <!-- テーブル -->
+  <table class="table">
+    <tr>
+      <th>質問項目</th>
+      <th>回答欄</tr>
+    <tr>
+      <td>回答者を選択してください</td>
+      <div class="dropdown">
+        <td>{{ form.member_id }}</td>
+      </div>
+    </tr>
+    <!-- 項目があるだけ繰り返して出力する -->
+    {% for i in answer_object_list %}
+    <tr>
+      <td>{{ i.item_id.item_name }}</td>
+      <!-- 項目に対応した回答欄を出す必要がある -->
+      {% if i.item_id.item_type_id.item_type_id == 1 %}
+      <td>
+        <div class="form-group">
+          <input type="text" class="form-control">
+        </div>
+      </td>
+
+      {% else %}
+      <td>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="check1a" checked>
+          <label class="form-check-label" for="check1a">参加する</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="check1b">
+          <label class="form-check-label" for="check1b">参加しない</label>
+        </div>
+        <td>
+          {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+  <button type="submit" class="btn btn-dark">回答する</button>
+</form>
+
+{% endblock %}
