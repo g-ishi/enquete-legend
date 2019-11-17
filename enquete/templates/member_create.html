@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<h1>部員作成画面(テスト用)</h1>
+<h1>部員作成画面</h1>
 
-<form action="/enquete/create/" method="POST">
-    <!-- csrf_token:postをする時には必ず入れる -->
-    {% csrf_token %}
-    {{ member_forms.member_name }}
-    <button>作成</button>
+<form action="{% url 'enquete:member_create' %}" method="POST">
+  <!-- csrf_token:postをする時には必ず入れる -->
+  {% csrf_token %}
+  <table border="1">
+    {% for form in forms %}
+    <tr>
+      <th>{{ form.label}}</th>
+      <td>{{ form }}</td>
+      <!-- バリデーションエラー時に表示 -->
+      {% if form.errors %}
+      <td>{{ form.errors }}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+  <button>作成</button>
 </form>
