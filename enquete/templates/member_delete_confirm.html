@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<h1>部員削除画面(確認)</h1>
+
+<h2>
+  <p>※以下のデータを削除します。</p>
+  <p>よろしければ、削除ボタンを押してください。</p>
+</h2>
+
+<form action="{% url 'enquete:member_delete_confrim' member.member_id %}" method="post">
+  {% csrf_token %}
+
+  <table border="1">
+    <tr>
+      <th>部員ID</th>
+      <td>{{ member.member_id }}</td>
+    </tr>
+    <tr>
+      <th>部員名</th>
+      <td>{{ member.member_name }}</td>
+    </tr>
+    <tr>
+      <th>登録日</th>
+      <td>{{ member.registration_date }}</td>
+    </tr>
+    <tr>
+      <th>ステータス</th>
+      <td>
+        {% if member.delete_flag %}
+        無効
+        {% else %}
+        有効
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+  <button>削除</button>
+</form>

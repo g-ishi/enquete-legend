@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<h1>検索画面</h1>
+
+<!-- 検索ボックス -->
+<form action="{% url 'enquete:member_find' %}" method="post">
+  <!-- csrf_token:postをする時には必ず入れる -->
+  {% csrf_token %}
+  <table border="1">
+    <tr>
+      <th>{{ forms.find.label }}</th>
+      <td>{{ forms.find }}</td>
+    </tr>
+  </table>
+  <button>検索</button>
+</form>
+
+<!-- 検索結果の一覧を表示 -->
+<table border="1">
+  <tr>
+    <th>部員ID</th>
+    <th>部員名</th>
+    <th>登録日</th>
+    <th>ステータス</th>
+  </tr>
+  {% for result in find_results %}
+  <tr>
+    <td>{{ result.member_id }}</td>
+    <td>{{ result.member_name }}</td>
+    <td>{{ result.registration_date }}</td>
+    <td>
+      {% if result.delete_flag %}
+      無効
+      {% else %}
+      有効
+      {% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>

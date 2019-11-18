@@ -6,6 +6,8 @@
     <th>部員名</th>
     <th>登録日</th>
     <th>ステータス</th>
+    <th>更新</th>
+    <th>削除</th>
   </tr>
   {% for member in member_list %}
   <tr>
@@ -16,10 +18,16 @@
     <td>{{ member.registration_date }}</td>
     <td>
       {% if member.delete_flag %}
-      有効
-      {% else %}
       無効
+      {% else %}
+      有効
       {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'enquete:member_update' member.member_id %}">更新する</a>
+    </td>
+    <td>
+      <a href="{% url 'enquete:member_delete_confrim' member.member_id %}">削除する</a>
     </td>
   </tr>
   {% endfor %}
