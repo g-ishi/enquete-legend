@@ -37,7 +37,7 @@ class EnqueteAnswer(CreateView):
         return context
 
 
-# class EnqueteCreate(CreateView):
+# class MemberCreate(CreateView):
 #     # TODO:質問項目を選択してアンケートを作成できるようにする
 #     # TODO:複数モデルにまたがる処理は、Templateとかでやるかも
 #     # TODO:form.pyでの処理がわかったら更新する
@@ -46,7 +46,7 @@ class EnqueteAnswer(CreateView):
 #     fields = ('member_id', 'enquete_name', 'answer_date')
 #     success_url = reverse_lazy('dashborad')
 
-class EnqueteCreate(TemplateView):
+class MemberCreate(TemplateView):
     # TODO:質問項目を選択してアンケートを作成できるようにする
     # TODO:複数モデルにまたがる処理は、Templateとかでやるかも
     # TODO:form.pyでの処理がわかったら更新する

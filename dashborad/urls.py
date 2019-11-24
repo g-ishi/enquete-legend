@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .views import Enquetedashborad, EnqueteDetail, EnqueteAnswer
-from .views import EnqueteCreate, EnqueteDelete
+from .views import MemberCreate, EnqueteDelete
 from .views import Test
 
 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('dashborad/', Enquetedashborad.as_view(), name='dashborad'),
     path('detail/<int:pk>', EnqueteDetail.as_view(), name='detail'),
     path('answer/<int:pk>', EnqueteAnswer.as_view(), name='answer'),
-    path('create/', EnqueteCreate.as_view(), name='create'),
+    path('create/', MemberCreate.as_view(), name='create'),
     path('delete/<int:pk>', EnqueteDelete.as_view(), name='delete'),
     path('test/', Test.as_view()),
     ]
