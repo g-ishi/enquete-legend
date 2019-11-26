@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashborad.apps.DashboradConfig',
-    'enquete.apps.EnqueteConfig'
+    'enquete.apps.EnqueteConfig',
+    'message.apps.MessageConfig',
 ]
 
 MIDDLEWARE = [

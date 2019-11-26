@@ -1,0 +1,21 @@
+<h1>いろんな種類のフォーム</h1>
+
+<form action="{% url goto %}" method="post">
+  {% csrf_token %}
+  <label for="id_text_input">テキスト：</label>
+  <input type="text" name="text_input" id="id_text_input">
+  <button>送信</button>
+</form>
+
+<h4>送信結果</h4>
+{% if text_data %}
+<p>テキスト：{{ text_data }}</p>
+{% endif %}
+
+<h4>フォームクラスを使用したフォーム</h4>
+
+<form action="{% url goto %}" method="post">
+  {% csrf_token %}
+  {{ forms.as_p }}
+  <button>送信する</button>
+</form>

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashborad/', include('dashborad.urls')),
     path('enquete/', include('enquete.urls')),
+    path('message/', include('message.urls')),
 ]

@@ -16,6 +16,7 @@ urlpatterns = [
     path('delete/result/',
          views.MemberDeleteResult.as_view(), name='member_delete_result'),
     path('find/', views.MemberFind.as_view(), name='member_find'),
-    path('sort/<sort_key>', views.MemberSort.as_view(), name='member_sort'),
+    path('sort/', views.MemberSort.as_view(), name='member_sort'),
+    path('sort/<sort_key>', views.MemberSort.as_view(), name='member_sort_page'),
     path('page/<int:page_num>', views.MemberPage.as_view(), name='member_page'),
 ]
