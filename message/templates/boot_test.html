@@ -1,0 +1,99 @@
+{% extends "base_test.html" %}
+
+{% block css %}
+<style>
+  .hide {
+    display: none;
+  }
+</style>
+{% endblock%}
+
+
+{% block title %}
+<title>アンケートフォーム作成(テスト)</title>
+{% endblock %}
+
+{% block main %}
+<h1>アンケートフォーム作成(テスト)</h1>
+
+<form action="{% url 'message:boot_test' %}" method="post" id="id_master_form">
+  {% csrf_token %}
+  <label>アンケートタイトル</label>
+  {{ forms.Q_name }}
+  <div id="1">
+    <p>
+      <label>質問文</label>
+      {{ forms.Q_text }}
+    </p>
+    <p>
+      <label>回答方法</label>
+      {{ forms.Q_type }}
+    </p>
+
+    <div class="choice">
+      <p id="id_choice" class="hide">
+        <label>選択肢</label>
+        {{ forms.Q_choice }}
+        <input type="button" value="＋" class="add">
+        <input type="button" value="－" class="del">
+      </p>
+    </div>
+  </div>
+
+  <!-- 質問を追加する領域 -->
+  <div id="id_addtional_Q"></div>
+
+  <input type="submit" value="送信する">
+</form>
+
+<div>
+  <button id="id_add_button">質問を追加</button>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+  //　最新の質問番号
+  let Q_num = 1
+
+  // onを使うと簡単に複数イベントを設定することができる
+  $('#id_add_button').on('click', function(){
+    Q_num = Q_num + 1
+
+    // 新しいnameの生成
+    let name_Q_choice = 'Q_choice' + '_' + Q_num
+
+    // 大元の質問を複製
+    let question = $('#1').clone(true)
+
+    question.find('#id_Q_choice').attr('name', name_Q_choice)
+
+    // 新しい質問の追加
+    question.appendTo('#id_addtional_Q')
+
+  })
+
+  // 選択肢の入力項目を表示させる  
+  $('.Q_type').change(function () {
+    if ($(this).val() !== 'text') {
+      $(this).parent().parent().find('#id_choice').removeClass("hide")
+    }
+    else {
+      $(this).parent().parent().find('#id_choice').addClass("hide")
+    }
+  })
+  
+  // 選択肢の追加
+  $('.add').on("click", function () {
+    $(this).parent().clone(true).insertAfter($(this).parent());
+  });
+  $('.del').on("click", function () {
+    var target = $(this).parent();
+    if (target.parent().children().length > 1) {
+      target.remove();
+    }
+  });
+
+</script>
+{% endblock %}
